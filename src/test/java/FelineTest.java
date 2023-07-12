@@ -8,10 +8,12 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+
 @RunWith(MockitoJUnitRunner.class)
 public class FelineTest {
-    @Mock
-    Feline felineMock;
+
+    Feline feline = new Feline();
 
 
     @Test
@@ -23,14 +25,15 @@ public class FelineTest {
     @Test
     public void shouldBeTwoNamesFamilyEquals() {
         Feline feline = new Feline();
-        Assert.assertEquals("Неверное значение! Должно быть семейство кошачьих", "Кошачьи", feline.getFamily());
+        assertEquals("Неверное значение! Должно быть семейство кошачьих", "Кошачьи", feline.getFamily());
     }
 
     @Test
     public void checkArgumentsMock() {
-        felineMock.getFamily();
-        Mockito.verify(felineMock).getFamily();
+        Feline feline = new Feline();
+        Assert.assertEquals("Кошачьи", feline.getFamily());
     }
+
 
     @Test
     public void getListWhoEatMeat() throws Exception{
@@ -41,12 +44,22 @@ public class FelineTest {
     @Test
     public void shouldBeTwoListWhoEatMeatEquals() throws Exception {
         Feline feline = new Feline();
-        Assert.assertEquals("Хищники относятся к семейству кошачьих", List.of("Животные", "Птицы", "Рыба"), feline.eatMeat());
+        assertEquals("Хищники относятся к семейству кошачьих", List.of("Животные", "Птицы", "Рыба"), feline.eatMeat());
     }
 
     @Test
     public void getKittens() {
         Feline feline = new Feline();
-        System.out.println(feline.getKittens());
+        int expectedCount = 1;
+        int actualCount = feline.getKittens();
+        Assert.assertEquals(expectedCount, actualCount);
+    }
+
+    @Test
+    public void getKittensTest() {
+        Feline feline = new Feline();
+        int expectedCount = 9;
+        int actualCount = feline.getKittens(expectedCount);
+        assertEquals(expectedCount, actualCount);
     }
 }

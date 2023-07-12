@@ -16,20 +16,18 @@ public class LionTest {
     Feline felineMock;
     // получить количество котят
     @Test
-    public void getLionKittens() throws Exception{
-        Feline feline = new Feline();
-        Lion lion = new Lion(feline ,"Самец");
-        System.out.println(lion.getKittens());
+    public void getLionKittens() throws Exception {
+        Lion lion = new Lion(felineMock, "Самец");
+        Mockito.when(felineMock.getKittens()).thenReturn(1);
+        int expectedKittenCount = 1;
+        assertEquals(expectedKittenCount, lion.getKittens());
     }
 
-    @Test
-    public void isHasManeExceptionTest() {
-        try {
-            Lion lion = new Lion(felineMock, "Не самец и не самка");
-        } catch (Exception exception) {
-            Assert.assertEquals("Используйте допустимые значения пола животного - самец или самка", exception.getMessage());
-        }
+    @Test(expected = Exception.class)
+    public void lionIncorrectInstance() throws Exception {
+        new Lion(felineMock,"Самко");
     }
+
 
     @Test
     public void shouldBeTwoKittensMeaningEquals() throws Exception {
@@ -51,12 +49,6 @@ public class LionTest {
         Mockito.when(felineMock.getFood("Хищник")).thenReturn(List.of("Животные", "Птицы", "Рыба"));
         Lion lion = new Lion(felineMock, "Самец");
         Assert.assertEquals(List.of("Животные", "Птицы", "Рыба"), lion.getFood());
-    }
-
-    @Test
-    public void testFood() throws Exception {
-        felineMock.getFood("Хищник");
-        Mockito.verify(felineMock).getFood("Хищник");
     }
 
     @Test
