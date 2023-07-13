@@ -38,11 +38,12 @@ public class LionTest {
     }
 
     @Test
-    public void getLionFood() throws Exception {
-        Feline feline = new Feline();
-        Lion lion = new Lion(feline ,"Самец");
-        System.out.println(feline.eatMeat());
-    }
+       public void getLionFood() throws Exception {
+           Feline feline = new Feline();
+           Lion lion = new Lion(feline ,"Самец");
+        List<String> expectedResult = List.of("Животные", "Птицы", "Рыба");
+        Assert.assertEquals("Это лев не ест", expectedResult, feline.eatMeat());
+       }
 
     @Test
     public void getFoodTest() throws Exception {
@@ -51,19 +52,20 @@ public class LionTest {
         Assert.assertEquals(List.of("Животные", "Птицы", "Рыба"), lion.getFood());
     }
 
-    @Test
+@Test
     public void doesHaveManeException() {
         Feline feline = new Feline();
         try {
             Lion lion = new Lion(feline ,"Самец");
         } catch (Exception exception) {
-            System.out.println(exception.getMessage());
+            Assert.assertEquals(true, exception.getMessage());
         }
     }
     @Test
     public void doesHaveMane() throws Exception{
         Feline feline = new Feline();
         Lion lion = new Lion(feline ,"Самка");
-        System.out.println(lion.doesHaveMane());
+        Assert.assertEquals(false ,lion.doesHaveMane());
     }
+
 }

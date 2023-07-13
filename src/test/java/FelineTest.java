@@ -19,7 +19,8 @@ public class FelineTest {
     @Test
     public void getNameFamily() {
         Feline feline = new Feline();
-        System.out.println(feline.getFamily());
+        String expectedResult = "Кошачьи";
+        assertEquals(feline.getFamily(), expectedResult);
     }
 
     @Test
@@ -36,9 +37,11 @@ public class FelineTest {
 
 
     @Test
-    public void getListWhoEatMeat() throws Exception{
+    public void getListWhoEatMeat() throws Exception {
         Feline feline = new Feline();
-        System.out.println(feline.eatMeat());
+        List<String> expectedFood = List.of("Животные", "Птицы", "Рыба");
+        List<String> actualFood = feline.eatMeat();
+        Assert.assertEquals(expectedFood, actualFood);
     }
 
     @Test
